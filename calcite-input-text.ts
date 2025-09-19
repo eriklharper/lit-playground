@@ -4,27 +4,31 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('calcite-input-text')
 export class CalciteInputText extends LitElement {
   static formAssociated = true;
-  static styles = css`p { color: blue }`;
-  
+  static styles = css`input { padding: .25rem .5rem; width: 100%; }`;
+
   internals: ElementInternals = this.attachInternals();
 
-  @property()
-  name = "calcite-input-text";
-  
-  @property()
-  value = "initial value";
-  
+  @property({ reflect: true, type: String })
+  name: string = "calcite-input-text";
+
+  @property({ reflect: true, type: String })
+  placeholder: string = "I am a form-associated LitElement";
+
+  @property({ type: String })
+  value: string = "";
+
   connectedCallback() {
     super.connectedCallback();
     this.internals.setFormValue(this.value);
   }
 
-  inputHandler(event) {
-    this.value = event.target.value;
-    this.internals.setFormValue(event.target.value);
+  inputHandler(event: InputEvent) {
+    const input = (event.target as HTMLInputElement);
+    this.value = input.value;
+    this.internals.setFormValue(input.value);
   }
 
   render() {
-    return html`<input @input="${this.inputHandler}" type="text" value="${this.value}" />`;
+    return html`<input placeholder="${this.placeholder}" @input="${this.inputHandler}" type="text" value="${this.value}" />`;
   }
 }

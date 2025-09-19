@@ -8,11 +8,31 @@
     <link rel="stylesheet" href="./src/index.css" />
     <script type="module" src="./calcite-input-text.js"></script>
     <script type="module" src="./calcite-form.js"></script>
+    <style type="text/css">
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        margin: 0;
+      }
+      label { font-size: 16px; display: flex; flex-direction: column; gap: 0.5rem;}
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+      }
+    </style>
   </head>
   <body>
     <calcite-form>
-      <form>
-        <calcite-input-text name="element-internals-test"></calcite-input-text>
+      <form name="element-internals-form">
+        <h1>Lit + ElementInternals</h1>
+        <label>
+          Type a value and hit submit to see this input component participating in its parent form.
+          <calcite-input-text name="element-internals-test"></calcite-input-text>
+        </label>
         <button type="submit">Submit</button>
       </form>
     </calcite-form>
